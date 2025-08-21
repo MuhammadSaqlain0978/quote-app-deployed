@@ -10,24 +10,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      -name: Checkout
-      uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      -name: installing node
-      uses: actions/setup-node@v3
+      - name: installing node
+        uses: actions/setup-node@v3
 
-      -name: running npm install
-      run: npm install
+      - name: running npm install
+        run: npm install
 
-      -name: making dist/ via npm build
-      run: npm run build
+      - name: making dist/ via npm build
+        run: npm run build
 
-      -name: AWS configration section
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: AWS configration section
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 
-      -name: Upload to S3
-      run: aws s3 sync ./dist s3://dep-vite/ 
+      - name: Upload to S3
+        run: aws s3 sync ./dist s3://dep-vite/ 
